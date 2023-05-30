@@ -2,6 +2,9 @@ import "./globals.css";
 import { Nunito, Manrope } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
+import Modals from "./components/Modals/Modals";
+import RegisterModal from "./components/Modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
 
 const nunito = Nunito({ subsets: ["latin"] });
 const rope = Manrope({ subsets: ["latin"] });
@@ -20,6 +23,8 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={rope.className}>
 				<ClientOnly>
+					<ToasterProvider />
+					<RegisterModal />
 					<Navbar />
 				</ClientOnly>
 
