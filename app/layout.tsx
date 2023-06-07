@@ -5,6 +5,7 @@ import ClientOnly from "./components/ClientOnly";
 import Modals from "./components/Modals/Modals";
 import RegisterModal from "./components/Modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
+import LoginModal from "./components/Modals/LoginModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 const rope = Manrope({ subsets: ["latin"] });
@@ -24,6 +25,7 @@ export default function RootLayout({
 			<body className={rope.className}>
 				<ClientOnly>
 					<ToasterProvider />
+					<LoginModal />
 					<RegisterModal />
 					<Navbar />
 				</ClientOnly>
