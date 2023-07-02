@@ -1,7 +1,14 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Nunito, Manrope } from "next/font/google";
+import Navbar from "./components/Navbar/Navbar";
+import ClientOnly from "./components/ClientOnly";
+import Modals from "./components/Modals/Modals";
+import RegisterModal from "./components/Modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
+import LoginModal from "./components/Modals/LoginModal";
 
-const inter = Inter({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"] });
+const rope = Manrope({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "AirBnB Clone",
@@ -15,7 +22,16 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={rope.className}>
+				<ClientOnly>
+					<ToasterProvider />
+					<LoginModal />
+					<RegisterModal />
+					<Navbar />
+				</ClientOnly>
+
+				{children}
+			</body>
 		</html>
 	);
 }
