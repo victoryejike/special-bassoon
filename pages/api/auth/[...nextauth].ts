@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
           toast.error("invalid cred");
           throw new Error("Invalid credentials");
         }
-        console.log(credentials);
+
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -50,7 +50,6 @@ export const authOptions: AuthOptions = {
           toast.error("invalid cred");
           throw new Error("Invalid credentials");
         }
-        console.log(user);
 
         return user;
       },
@@ -66,4 +65,7 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+const authHandler = NextAuth(authOptions);
+export default async function handler(...params: any[]) {
+  await authHandler(...params);
+}
