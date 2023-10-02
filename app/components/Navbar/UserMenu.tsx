@@ -1,6 +1,7 @@
 "use client";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import { useCallback, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
@@ -21,13 +22,23 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const { onOpen, onClose } = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
+
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    // ON Rent fnction
+    rentModal.onOpen();
+  }, [loginModal, currentUser, rentModal]);
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-          onClick={() => {}}
+          onClick={onRent}
         >
           Airbnb your home
         </div>
@@ -50,7 +61,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={() => {}} label="My reservations" />
                 <MenuItem onClick={() => {}} label="My properties" />
                 <MenuItem onClick={() => {}} label="My favorites" />
-                <MenuItem onClick={() => {}} label="Airbnb my home" />
+                <MenuItem
+                  onClick={() => rentModal.onOpen()}
+                  label="Airbnb my home"
+                />
                 <hr />
                 <MenuItem
                   onClick={() => {
