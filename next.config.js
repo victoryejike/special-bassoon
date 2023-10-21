@@ -10,4 +10,10 @@ const nextConfig = {
   },
 };
 
+module.exports = {
+  prisma: {
+    schema: "./prisma/schema.prisma",
+  },
+};
+
 module.exports = nextConfig;
